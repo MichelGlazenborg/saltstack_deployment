@@ -4,7 +4,6 @@ ERROR='\033[0;31m'
 INFO='\033[0;32m'
 NC='\033[0m'
 
-
 # Downloading the Saltstack bootstrap installation
 echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please...\n"
 wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
