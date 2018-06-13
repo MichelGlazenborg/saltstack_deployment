@@ -36,6 +36,6 @@ fi
 
 # Install Saltstack using the IP of the Saltstack Master
 echo -e "${INFO}INFO${NC}: Installing Saltstack with Saltstack Master IP $ip\n"
-#sudo sh /tmp/install_salt.sh -A $ip
+sudo sh /tmp/install_salt.sh -A $ip
 
 echo -e "${INFO}INFO${NC}: Saltstack Minion succesfully installed!"
