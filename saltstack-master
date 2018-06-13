@@ -1,0 +1,5 @@
+#! /bin/bash
+
+wget -O /tmp/install_salt.sh https://bootstrap.saltstack.com
+sudo sh install_salt.sh -M -A 127.0.0.1
+
