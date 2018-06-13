@@ -1,40 +1,36 @@
 #! /bin/bash
 
-echo Downloading the bootstrap installation. One moment please...
+# Downloading the Saltstack bootstrap installation
+echo -e "Downloading the bootstrap installation. One moment please...\n"
 wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
 
-echo ""
-echo Please insert the Saltstack master IP adress.
-
+# Asking for Saltstack Master IP for later use
+echo -e "Please insert the Saltstack master IP adress."
 read -p 'Saltstack Master IP: ' ip
 
+# IP verification using ping.
 ping -q -c5 $ip > /dev/null
- 
+
 if [ $? -ne 0 ]; then
-	echo ""
-	echo ERROR: Unable to ping IP adress!
-	read -p 'Do you whish to continue with '$ip' (y/n): ' cont 
+	echo -e "\nERROR: Unable to ping IP adress!\n"
+	read -p "Do you whish to continue with '$ip' (yes/no): " cont 
 
 	if [ "$cont" == "y" ] || [ "$cont" == "Y" ] || [ "$cont" == "yes" ] || [ "$cont" == "Yes" ]; then
-		echo ""
-		echo Continuing with $ip
+		echo -e "Continuing with given IP\n"
 	elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont" == "No" ]; then
-		echo ""
-		echo Exiting Saltstack Minion install!
+		echo "Exiting Saltstack Minion install!"
 		exit
 	else
-		echo ""
-		echo No valid input detected!
-		echo Exiting Saltstack Minion install!
+		echo "No valid input detected!"
+		echo "Exiting Saltstack Minion install!"
 		exit
 	fi
 else
-	echo Saltstack Master found!
+	echo -e "Saltstack Master found!\n"
 fi
 
-echo ""
-echo Installing Saltstack with Saltstack Master IP $ip
+# Install Saltstack using the IP of the Saltstack Master
+echo -e "Installing Saltstack with Saltstack Master IP $ip\n"
 sudo sh /tmp/install_salt.sh -A $ip
 
-echo ""
 echo Saltstack Minion succesfully installed!
