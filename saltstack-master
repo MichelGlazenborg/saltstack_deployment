@@ -1,5 +1,25 @@
 #! /bin/bash
 
-wget -O /tmp/install_salt.sh https://bootstrap.saltstack.com
-sudo sh install_salt.sh -M -A 127.0.0.1
+# Defining colors
+ERROR='\033[0;31m'
+INFO='\033[0;32m'
+NC='\033[0m'
 
+# Confirm installation
+echo "Running this file will install Saltstack Master on this system."
+read -p 'Do you wish to continue? (y/n): ' cont
+
+if [ "$cont" == "y" ] || [ "$cont" == "Y" ] || [ "$cont" == "yes" ] || [ "$cont" == "Yes" ]; then
+	echo -e "\n${INFO}INFO${NC}: Saltstack Master will now be installed on this system"
+elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont" == "No" ]; then
+	echo -e "\n${INFO}INFO${NC}: Exiting Saltstack Master install!"
+	exit
+else
+	echo -e "\n${ERROR}ERROR${NC}: No valid input detected!"
+	echo -e "${INFO}INFO${NC}: Exiting Saltstack Master install!"
+	exit
+fi
+
+# Downloading the bootstrap installation
+echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please..."
+wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com

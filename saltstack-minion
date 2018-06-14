@@ -5,12 +5,27 @@ ERROR='\033[0;31m'
 INFO='\033[0;32m'
 NC='\033[0m'
 
+# Confirm installation
+echo "Running this file will install Saltstack Minion on this system."
+read -p 'Do you wish to continue? (y/n): ' cont
+
+if [ "$cont" == "y" ] || [ "$cont" == "Y" ] || [ "$cont" == "yes" ] || [ "$cont" == "Yes" ]; then
+        echo -e "\n${INFO}INFO${NC}: Saltstack Minion will now be installed on this system"
+elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont" == "No" ]; then
+        echo -e "\n${INFO}INFO${NC}: Exiting Saltstack Minion install!"
+        exit
+else
+        echo -e "$\n{ERROR}ERROR${NC}: No valid input detected!"
+        echo -e "${INFO}INFO${NC}: Exiting Saltstack Minion install!"
+        exit
+fi
+
 # Downloading the Saltstack bootstrap installation
-echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please...\n"
+echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please..."
 wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
 
 # Asking for Saltstack Master IP for later use
-echo -e "Please insert the Saltstack master IP adress."
+echo -e "\nPlease insert the Saltstack master IP adress."
 read -p 'Saltstack Master IP: ' ip
 
 # IP verification using ping.
@@ -18,25 +33,25 @@ read -p 'Saltstack Master IP: ' ip
 ping -q -c 3 $ip > /dev/null
 
 if [ $? -ne 0 ]; then
-	echo -e "\n${ERROR}ERROR${NC}: Unable to ping IP adress!\n"
-	read -p "Do you whish to continue with '$ip' (yes/no): " cont 
+	echo -e "\n${ERROR}ERROR${NC}: Unable to ping IP adress!"
+	read -p "Do you whish to continue with '$ip' (y/n): " cont 
 
 	if [ "$cont" == "y" ] || [ "$cont" == "Y" ] || [ "$cont" == "yes" ] || [ "$cont" == "Yes" ]; then
-		echo -e "Continuing with given IP\n"
+		echo -e "\n${INFO}INFO${NC}: Continuing with given IP"
 	elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont" == "No" ]; then
-		echo "Exiting Saltstack Minion install!"
+		echo -e "\n${INFO}INFO${NC}: Exiting Saltstack Minion install!"
 		exit
 	else
 		echo -e "\n${ERROR}ERROR${NC}: No valid input detected!"
-		echo "Exiting Saltstack Minion install!"
+		echo -e "${INFO}INFO${NC}: Exiting Saltstack Minion install!"
 		exit
 	fi
 else
-	echo -e "${INFO}INFO${NC}: Saltstack Master found!\n"
+	echo -e "\n${INFO}INFO${NC}: Saltstack Master found!"
 fi
 
 # Install Saltstack using the IP of the Saltstack Master
-echo -e "${INFO}INFO${NC}: Installing Saltstack with Saltstack Master IP $ip\n"
-sudo sh /tmp/install_salt.sh -A $ip
+echo -e "${INFO}INFO${NC}: Installing Saltstack with Saltstack Master IP $ip"
+#sudo sh /tmp/install_salt.sh -A $ip
 
 echo -e "${INFO}INFO${NC}: Saltstack Minion succesfully installed!"
