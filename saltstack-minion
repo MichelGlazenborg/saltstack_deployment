@@ -14,7 +14,8 @@ echo -e "Please insert the Saltstack master IP adress."
 read -p 'Saltstack Master IP: ' ip
 
 # IP verification using ping.
-ping -q -c5 $ip > /dev/null
+# Source: http://wisercoder.com/ping-return-truefalse/ 
+ping -q -c 3 $ip > /dev/null
 
 if [ $? -ne 0 ]; then
 	echo -e "\n${ERROR}ERROR${NC}: Unable to ping IP adress!\n"
