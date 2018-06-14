@@ -23,3 +23,10 @@ fi
 # Downloading the bootstrap installation
 echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please..."
 wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
+
+#Installing Saltstack as Master and as Minion
+echo -e "${INFO}INFO${NC}: Install Saltstack Master and Minion"
+sudo sh /tmp/install_salt.sh -M -A 127.0.0.1
+
+echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
+
