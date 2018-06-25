@@ -1,0 +1,11 @@
+#! /bin/bash
+
+# Defining colors
+ERROR='\033[0;31m'
+INFO='\033[0;32m'
+NC='\033[0m'
+
+# Confirm installation
+echo -e "${INFO}INFO${NC}: Installing prerequisites"
+sudo apt-get update
+sudo apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.0 libgd2-xpm-dev
