@@ -7,5 +7,41 @@ NC='\033[0m'
 
 # Confirm installation
 echo -e "${INFO}INFO${NC}: Installing prerequisites"
-sudo apt-get update
-sudo apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.0 libgd2-xpm-dev
+#sudo apt-get update
+#sudo apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.0 libgd2-xpm-dev
+
+#Downloading and compiling the source
+echo -e "${INFO}INFO${NC}: Downloading the source"
+wget -q -O /tmp/nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.3.4.tar.gz
+errorcode=$?
+if [ $errorcode != 0 ]; then
+	echo -e "${ERROR}ERROR${NC}: An error occured while trying to download the file (wget error: $errorcode)"
+	exit
+fi
+
+cd /tmp
+
+tar -xzf nagioscore.tar.gz >/dev/null 2>&1
+errorcode=$?
+if [ $errorcode != 0 ]; then
+        echo -e "${ERROR}ERROR${NC}: An error occured while trying to extract the file (tar error: $errorcode)"
+        exit
+fi
+
+cd /tmp/nagioscore-nagios-4.3.4/
+sudo ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+sudo make all
+
+sudo useradd nagios
+sudo usermod -a -G nagios www-data
+sudo make install
+sudo make install-init
+update-rc.d nagios defaults
+sudo make install-commandmode
+sudo make install-config
+sudo make install-webconf
+sudo a2enmod rewrite
+sudo a2enmod cgi
+sudo htpasswd -c -b /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
+sudo systemctl restart apache2
+sudo systemctl start nagios
