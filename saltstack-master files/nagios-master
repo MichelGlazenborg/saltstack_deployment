@@ -7,8 +7,8 @@ NC='\033[0m'
 
 # Confirm installation
 echo -e "${INFO}INFO${NC}: Installing prerequisites"
-#sudo apt-get update
-#sudo apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.0 libgd2-xpm-dev
+sudo apt-get update
+sudo apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.0 libgd2-xpm-dev
 
 #Downloading and compiling the source
 echo -e "${INFO}INFO${NC}: Downloading the source"
