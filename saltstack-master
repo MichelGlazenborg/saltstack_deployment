@@ -31,4 +31,4 @@ sudo sh /tmp/install_salt.sh -M -A 127.0.0.1
 echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
 echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
-sudo mv saltstack-master\ files/!(README.md) /srv
+sudo mv saltstack-master\ files/* /srv
