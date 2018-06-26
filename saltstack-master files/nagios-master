@@ -69,7 +69,7 @@ sudo make check_nrpe
 sudo make install-plugin
 sudo sed -i -e 's+#cfg_dir=/usr/local/nagios/etc/servers+cfg_dir=/usr/local/nagios/etc/servers+g' /usr/local/nagios/etc/nagios.cfg
 
-sudo echo "Define command{" >> /usr/local/nagios/etc/objects/commands.cfg
-sudo echo "	command_name check_nrpe" >> /usr/local/nagios/etc/objects/commands.cfg
-sudo echo "	command_line $USER1/check_nrpe -H $HOSTADDRESS$ -c $ARG1$" >> /usr/local/nagios/etc/objects/commands.cfg
-sudo echo "}" >> /usr/local/nagios/etc/objects/commands.cfg
+sudo echo 'define command{' >> /usr/local/nagios/etc/objects/commands.cfg
+sudo echo '	command_name check_nrpe' >> /usr/local/nagios/etc/objects/commands.cfg
+sudo echo '	command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$' >> /usr/local/nagios/etc/objects/commands.cfg
+sudo echo '}' >> /usr/local/nagios/etc/objects/commands.cfg
