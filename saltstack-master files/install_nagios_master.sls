@@ -1,5 +1,5 @@
-run install_nagios_master
+run install_nagios_master:
  cmd:
  - run
- - name: nagios-master
+ - name: /srv/salt/nagios-master
 
