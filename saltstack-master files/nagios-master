@@ -60,11 +60,11 @@ sudo make
 sudo make install
 sudo systemctl restart nagios
 
-wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-3.2.1/nrpe-3.2.1.tar.gz 
-tar zxf /tmp/nrpe-*
+wget -O /tmp/nrpe.tar.gz https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-3.2.1/nrpe-3.2.1.tar.gz 
+tar zxf /tmp/nrpe.tar.gz
 cd /tmp/nrpe-*
 sudo ./configure
 sudo make check_nrpe
 sudo make install-plugin
-sudo sed -i -e 's/"#cfg_dir=/usr/local/nagios/etc/servers"/"cfg_dir=/usr/local/nagios/etc/servers"/g' /usr/local/nagios/etc/nagios.cfg
+sudo sed -i -e 's/(#cfg_dir=/usr/local/nagios/etc/servers)/(cfg_dir=/usr/local/nagios/etc/servers)/g' /usr/local/nagios/etc/nagios.cfg
 
