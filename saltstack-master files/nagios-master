@@ -67,5 +67,5 @@ cd /tmp/nrpe-*
 sudo ./configure
 sudo make check_nrpe
 sudo make install-plugin
-sudo sed -i -e 's/(#cfg_dir=/usr/local/nagios/etc/servers)/(cfg_dir=/usr/local/nagios/etc/servers)/g' /usr/local/nagios/etc/nagios.cfg
+sudo sed -i -e 's+#cfg_dir=/usr/local/nagios/etc/servers+cfg_dir=/usr/local/nagios/etc/servers+g' /usr/local/nagios/etc/nagios.cfg
 
