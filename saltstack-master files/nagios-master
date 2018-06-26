@@ -45,3 +45,16 @@ sudo a2enmod cgi
 sudo htpasswd -c -b /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 sudo systemctl restart apache2
 sudo systemctl start nagios
+
+echo -e "${INFO}INFO${NC}: Finished installing nagios"
+echo -e "${INFO}INFO${NC}: Installing Nagios Plugins prerequisites"
+
+sudo apt-get install -y -q autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext
+wget --no-check-certificate -O /tmp/nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+tar zxf nagios-plugins.tar.gz
+cd /tmp/nagios-plugins-release-2.2.1/
+sudo ./tools/setup
+sudo ./configure
+sudo make
+sudo make install
+sudo systemctl restart nagios
