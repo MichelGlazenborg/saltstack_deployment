@@ -59,3 +59,13 @@ echo -e "${INFO}INFO${NC}: Installing Saltstack with Saltstack Master IP $ip"
 sh /tmp/install_salt.sh -A $ip
 
 echo -e "${INFO}INFO${NC}: Saltstack Minion succesfully installed!"
+echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
+
+# Create directory
+mkdir /srv/scripts
+
+# Enable extglob
+shopt -s extglob
+
+# Copy files
+cp saltstack_master_files/!(*.sls) /srv/scripts
