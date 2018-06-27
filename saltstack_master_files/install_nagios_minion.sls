@@ -9,8 +9,7 @@ replace allowed_hosts:
  - pattern: allowed_hosts=172.0.0.1,::1
  - repl: allowed_hosts=172.0.0.1,::1,{{ grains['master'] }}
 
-replace server_address:
- file.replace:
+uncomment server_address:
+ file.uncomment:
  - name: /usr/local/nagios/etc/nrpe.cfg
- - pattern: #server_address=127.0.0.1
- - repl: server_address=127.0.0.1
+ - regex: server_address=127.0.0.1
