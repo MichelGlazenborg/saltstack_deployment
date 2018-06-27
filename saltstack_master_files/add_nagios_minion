@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Defining colors
+ERROR='\033[0;31m'
+INFO='\033[0;32m'
+NC='\033[0m'
+
+# Ask for system information
+echo "Please insert the system information"
+read -p 'Hostname: ' HOST_NAME
+read -p 'IP address: ' HOST_IP
+
+echo -e "\n${INFO}INFO${NC}: The client will be configured using the following detail:"
+echo -e "      Hostname: $HOST_NAME"
+echo -e "      IP address: $HOST_IP\n"
+read -p 'Do you wish to continue? (y/n): ' cont
+
+if [ "$cont" == "y" ] || [ "$cont" == "Y" ] || [ "$cont" == "yes" ] || [ "$cont" == "Yes" ]; then
+        echo -e "\n${INFO}INFO${NC}: Continueing configuration"
+elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont" == "No" ]; then
+        echo -e "\n${INFO}INFO${NC}: Exiting configuration!"
+        exit
+else
+        echo -e "\n${ERROR}ERROR${NC}: No valid input detected!"
+        echo -e "${INFO}INFO${NC}: Exiting configuration!"
+        exit
+fi
+
+cp /srv/templates/server_template.cfg /usr/local/nagios/etc/servers/$HOST_NAME.cfg
+sed -i -e 's/HOST_NAME/$HOST_NAME/g' /usr/local/nagios/etc/servers/$HOST_NAME.cfg
+sed -i -e 's/HOST_IP/$HOST_IP/g' /usr/local/nagios/etc/servers/$HOST_NAME.cfg

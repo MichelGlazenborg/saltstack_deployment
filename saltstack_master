@@ -44,4 +44,5 @@ shopt -s extglob
 
 # Copy files
 cp saltstack_master_files/*.sls /srv/salt
-cp saltstack_master_files/!(*.sls) /srv/scripts
+cp saltstack_master_files/*.cfg /srv/templates
+cp saltstack_master_files/!(*.sls || *.cfg) /srv/scripts
