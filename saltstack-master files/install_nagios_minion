@@ -1,3 +1,25 @@
 #! /bin/bash
 
+MASTER_IP=$1
 
+sudo apt-get update
+sudo apt-get install -y autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext
+
+wget --no-check-certificate -O /tmp/nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+tar -zxf /tmp/nagios-plugins.tar.gz
+cd /tmp/nagios-plugins-release-2.2.1/
+sudo ./tools/setup
+sudo ./configure
+sudo make
+sudo make install
+sudo useradd nagios
+cd /tmp
+wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-3.2.1/nrpe-3.2.1.tar.gz
+tar zxf nrpe-3.2.1.tar.gz
+cd /tmp/nrpe-*
+sudo ./configure
+sudo make all
+sudo make install
+sudo make install-config
+sudo make install-init
+sudo sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,$MASTER_IP/g' /usr/local/nagios/etc/nrpe.cfg
