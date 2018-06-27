@@ -31,8 +31,8 @@ sudo sh /tmp/install_salt.sh -M -A 127.0.0.1
 echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
 echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
-sudo shopt -s extglob
+shopt -s extglob
 sudo mkdir /srv/salt
 sudo mkdir /srv/scripts
 sudo cp saltstack_master_files/*.sls /srv/salt
-sudo cp saltstack_master_files/!(*.sls) /srv/scripts
+sudo cp saltstack_master_files/!(sls) /srv/scripts
