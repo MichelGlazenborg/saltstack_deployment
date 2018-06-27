@@ -15,8 +15,9 @@ replace disk:
  - pattern: /dev/hda1
  - repl: /dev/sda1
 
-uncomment server_address:
- file.uncomment:
+replace server_address:
+ file.replace:
  - name: /usr/local/nagios/etc/nrpe.cfg
- - regex: server_address=127.0.0.1
+ - pattern: #server_address=127.0.0.1
+ - repl: server_address={{ grains['ip_interfaces']['ens33'][0] }}
 
