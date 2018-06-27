@@ -32,4 +32,4 @@ echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
 echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
 sudo mkdir /srv/salt
-sudo mv saltstack-master\ files/* /srv/salt
+sudo cp saltstack-master\ files/* /srv/salt
