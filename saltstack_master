@@ -32,7 +32,7 @@ wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
 echo -e "${INFO}INFO${NC}: Install Saltstack Master and Minion"
 sh /tmp/install_salt.sh -M -A 127.0.0.1
 
-echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
+echo -e "${INFO}INFO${NC}: Saltstack Master been installed"
 echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
 # Create directorys
@@ -47,3 +47,5 @@ shopt -s extglob
 cp saltstack_master_files/*.sls /srv/salt
 cp saltstack_master_files/*.cfg /srv/templates
 cp saltstack_master_files/!(*.sls || *.cfg) /srv/scripts
+
+echo -e "${INFO}INFO${NC}: Saltstack Master has succesfully been installed!"
