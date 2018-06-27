@@ -1,7 +1,7 @@
 run install_nagios_minion:
  cmd:
  - run
- - name: /srv/salt/install_nagios_minion
+ - name: /srv/scripts/install_nagios_minion
 
 replace allowed_hosts:
  file.replace:
