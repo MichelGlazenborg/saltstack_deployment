@@ -5,6 +5,10 @@ ERROR='\033[0;31m'
 INFO='\033[0;32m'
 NC='\033[0m'
 
+# Ensure execution as sudo
+# Source: https://askubuntu.com/questions/746350/request-root-privilege-from-within-a-script/748362
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
 # Confirm installation
 echo "Running this file will install Saltstack Minion on this system."
 read -p 'Do you wish to continue? (y/n): ' cont
@@ -52,6 +56,6 @@ fi
 
 # Install Saltstack using the IP of the Saltstack Master
 echo -e "${INFO}INFO${NC}: Installing Saltstack with Saltstack Master IP $ip"
-sudo sh /tmp/install_salt.sh -A $ip
+sh /tmp/install_salt.sh -A $ip
 
 echo -e "${INFO}INFO${NC}: Saltstack Minion succesfully installed!"

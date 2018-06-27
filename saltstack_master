@@ -5,6 +5,10 @@ ERROR='\033[0;31m'
 INFO='\033[0;32m'
 NC='\033[0m'
 
+# Ensure execution as sudo
+# Source: https://askubuntu.com/questions/746350/request-root-privilege-from-within-a-script/748362 
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
 # Confirm installation
 echo "Running this file will install Saltstack Master on this system."
 read -p 'Do you wish to continue? (y/n): ' cont
@@ -24,15 +28,20 @@ fi
 echo -e "${INFO}INFO${NC}: Downloading the bootstrap installation. One moment please..."
 wget -q -O /tmp/install_salt.sh https://bootstrap.saltstack.com
 
-#Installing Saltstack as Master and as Minion
+# Installing Saltstack as Master and as Minion
 echo -e "${INFO}INFO${NC}: Install Saltstack Master and Minion"
-sudo sh /tmp/install_salt.sh -M -A 127.0.0.1
+sh /tmp/install_salt.sh -M -A 127.0.0.1
 
 echo -e "${INFO}INFO${NC}: Saltstack Master succesfully installed!"
 echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
+# Create directorys
+mkdir /srv/salt
+mkdir /srv/scripts
+
+# Enable extglob
 shopt -s extglob
-sudo mkdir /srv/salt
-sudo mkdir /srv/scripts
-sudo cp saltstack_master_files/*.sls /srv/salt
-sudo cp saltstack_master_files/!(sls) /srv/scripts
+
+# Copy files
+cp saltstack_master_files/*.sls /srv/salt
+cp saltstack_master_files/!(sls) /srv/scripts
