@@ -38,6 +38,7 @@ echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 # Create directorys
 mkdir /srv/salt
 mkdir /srv/scripts
+mkdir /srv/templates
 
 # Enable extglob
 shopt -s extglob
