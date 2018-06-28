@@ -7,7 +7,7 @@ install_syslog_server:
 append destination:
  file.append:
  - name: /etc/syslog-ng/syslog-ng.conf
- - text: destination d_network { tcp("{{ grains['master'] }}") port(601)); );
+ - text: destination d_network { tcp("{{ grains['master'] }}" port(601)); };
 
 append log:
  file.append:
