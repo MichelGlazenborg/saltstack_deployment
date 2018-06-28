@@ -7,11 +7,11 @@ docker_requirements:
  pkgrepo.managed:
  - humanname: Docker
  - name: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
- - file: /etc/aapr/sources.list.d/docker.list
+ - file: /etc/apt/sources.list.d/docker.list
  - gpgcheck: 1
  - key_url: https://download.docker.com/linux/ubuntu/gpg
 
-docker-ce
+docker-ce:
  pkg.latest: []
  require:
   - pkgrepo: docker_prerequisites
