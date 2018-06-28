@@ -8,6 +8,7 @@ copy syslog-ng.conf:
  file.copy:
  - name: /etc/syslog-ng/syslog-ng.conf
  - source: /srv/templates/syslog-ng_client.conf
+ - force: True
 
 replace server_ip:
  file.replace:
