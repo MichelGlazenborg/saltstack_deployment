@@ -13,7 +13,7 @@ copy syslog-ng.conf:
 replace server_ip:
  file.replace:
  - name: /etc/syslog-ng/syslog-ng.conf
- - pattern: $SERVER_IP
+ - pattern: SERVER_IP
  - repl: {{ grains['master'] }}
 
 restart syslog-ng:
