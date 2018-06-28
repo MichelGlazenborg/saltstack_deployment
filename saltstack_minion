@@ -63,11 +63,13 @@ echo -e "${INFO}INFO${NC}: Moving deployment files to directory"
 
 # Create directory
 mkdir /srv/scripts
+mkdir /srv/templates
 
 # Enable extglob
 shopt -s extglob
 
 # Copy files
-cp saltstack_master_files/!(*.sls) /srv/scripts
+cp saltstack_master_files/!(*.sls || *.cfg || *.conf) /srv/scripts
+cp saltstack_master_files/(*.cfg || *.conf) /srv/templates
 
 echo -e "${INFO}INFO${NC}: Saltstack Minion has succesfully been installed!"

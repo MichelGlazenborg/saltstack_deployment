@@ -4,16 +4,15 @@ install_syslog_server:
    - syslog-ng
    - syslog-ng-core
 
-copy syslog-ng.conf:
- file.copy:
+append destination:
+ file.append:
  - name: /etc/syslog-ng/syslog-ng.conf
- - source: /srv/templates/syslog-ng_client.conf
+ - text: destination d_network { tcp("{{ grains['master'] }}" port(601)); };
 
-replace server_ip:
- file.replace:
+append log:
+ file.append:
  - name: /etc/syslog-ng/syslog-ng.conf
- - pattern: $SERVER_IP
- - repl: {{ grains['master'] }}
+ - text: log { source(s_src); filter(f_syslog3); destination(d_network); };
 
 restart syslog-ng:
  cmd:

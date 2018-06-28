@@ -4,20 +4,10 @@ install_syslog_server:
    - syslog-ng
    - syslog-ng-core
 
-append source:
- file.append:
+copy syslog-ng.conf:
+ file.copy:
  - name: /etc/syslog-ng/syslog-ng.conf
- - text: source s_network { network(transport(tcp) port(601)); }; 
-
-append destination:
- file.append:
- - name: /etc/syslog-ng/syslog-ng.conf
- - text: destination d_remote_syslog { file("/var/log/$HOST/syslog/$YEAR-$MONTH-$DAY.log" create_dirs(yes)); };
-
-append log:
- file.append:
- - name: /etc/syslog-ng/syslog-ng.conf
- - text: log { source(s_network); destination(d_remote_syslog); };
+ - source: /srv/templates/syslog-ng_server.conf
 
 restart syslog-ng:
  cmd:
