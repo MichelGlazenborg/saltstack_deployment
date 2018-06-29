@@ -19,7 +19,7 @@ elif [ "$cont" == "n" ] || [ "$cont" == "N" ] || [ "$cont" == "no" ] || [ "$cont
         echo -e "\n${INFO}INFO${NC}: Exiting Saltstack Minion install!"
         exit
 else
-        echo -e "$\n{ERROR}ERROR${NC}: No valid input detected!"
+        echo -e "\n${ERROR}ERROR${NC}: No valid input detected!"
         echo -e "${INFO}INFO${NC}: Exiting Saltstack Minion install!"
         exit
 fi
