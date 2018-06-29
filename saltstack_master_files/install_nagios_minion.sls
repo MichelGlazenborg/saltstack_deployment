@@ -19,5 +19,5 @@ replace server_address:
  file.replace:
  - name: /usr/local/nagios/etc/nrpe.cfg
  - pattern: #server_address=127.0.0.1
- - repl: server_address={{ grains['ip_interfaces']['ens33'][0] }}
+ - repl: server_address={{ grains['ip_interfaces']['eth0'][0] }}
 
